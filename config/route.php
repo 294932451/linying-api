@@ -13,6 +13,15 @@
  */
 
 use Webman\Route;
+use app\middleware\AccessControl;
+
+Route::group('/api', function () {
+    Route::any('/index', function ($request) {
+
+
+
+    });
+});
 
 
 
