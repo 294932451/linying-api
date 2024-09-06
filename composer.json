@@ -29,8 +29,11 @@
     "monolog/monolog": "^2.0",
     "illuminate/database": "^11.21",
     "illuminate/pagination": "^11.21",
-    "illuminate/events": "^11.21",
-    "symfony/var-dumper": "^7.1"
+    "illuminate/events": "^11.22",
+    "symfony/var-dumper": "^7.1",
+    "webman/admin": "^0.6.30",
+    "illuminate/redis": "^11.22",
+    "symfony/cache": "^7.1"
   },
   "suggest": {
     "ext-event": "For better performance. "

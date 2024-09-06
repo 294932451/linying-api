@@ -13,14 +13,14 @@
  */
 
 use Webman\Route;
-use app\middleware\AccessControl;
+use app\controller;
 
 Route::group('/api', function () {
-    Route::any('/index', function ($request) {
-
-
-
-    });
+    Route::any('/banner', [controller\IndexController::class, 'banner']); #轮播图
+    Route::any('/my/images', [controller\MyController::class, 'images']); #我的首页图
+    Route::any('/my/index', [controller\MyController::class, 'index']); #我的
+    Route::any('/photo/cate', [controller\PhotoController::class, 'photo_cate']); #相册分类
+    Route::any('/daily_article/save', [controller\DailyArticleController::class, 'save']); #记日记
 });
 
 
