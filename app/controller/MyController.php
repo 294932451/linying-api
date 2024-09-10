@@ -36,6 +36,7 @@ class MyController
         $list = [
             ['name' => '距离猪猪林的生日还有', 'days' => $linDaysRemaining,'iconClass'=>'http://39.98.115.211:8787/app/admin/upload/files/20240903/66d6cab61bbd.jpg'],
             ['name' => '距离猪猪童的生日还有', 'days' => $tongDaysRemaining ,'iconClass'=>'http://39.98.115.211:8787/app/admin/upload/img/20240903/66d6d6f97fef.jpg'],
+            ['name' =>  '第一次打电话睡觉','days' => '2024-07-28'],
         ];
         return json([
            'code' => 1,

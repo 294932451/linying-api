@@ -29,6 +29,18 @@ class DailyArticle extends Base
      */
     protected $primaryKey = 'id';
 
+    protected $guarded = [];
+
+    public function getImagesAttribute($value)
+    {
+        if ($value) {
+            foreach (explode(',', $value) as $v) {
+                $arr[] = 'http://39.98.115.211:8787' . $v;
+            }
+            return $arr;
+        }
+    }
+
 
 
 }

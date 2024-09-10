@@ -171,7 +171,7 @@ class UploadController extends Crud
         try {
             // 临时增加内存限制，避免内存不足问题
             ini_set('memory_limit', '512M');
-            $img = Image::make($realpath);
+            $img = Image::make($realpath)->orientate();
             $max_height = 1170;
             $max_width = 1170;
             $width = $img->width();

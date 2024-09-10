@@ -16,11 +16,15 @@ use Webman\Route;
 use app\controller;
 
 Route::group('/api', function () {
+    Route::any('/upload/file', [controller\UploadController::class, 'image']); #上传图片
+    Route::any('/index', [controller\IndexController::class, 'index']); #首页
     Route::any('/banner', [controller\IndexController::class, 'banner']); #轮播图
     Route::any('/my/images', [controller\MyController::class, 'images']); #我的首页图
     Route::any('/my/index', [controller\MyController::class, 'index']); #我的
     Route::any('/photo/cate', [controller\PhotoController::class, 'photo_cate']); #相册分类
+    Route::any('/daily_article/list', [controller\DailyArticleController::class, 'index']); #日记列表
     Route::any('/daily_article/save', [controller\DailyArticleController::class, 'save']); #记日记
+    Route::any('/daily_article/detail/{id}', [controller\DailyArticleController::class, 'detail']); #记日记
 });
 
 
