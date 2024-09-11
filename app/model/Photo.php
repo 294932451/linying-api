@@ -4,7 +4,7 @@ namespace app\model;
 
 use support\Model;
 
-class Photo extends Model
+class Photo extends Base
 {
     /**
      * The table associated with the model.

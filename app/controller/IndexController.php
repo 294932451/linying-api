@@ -12,8 +12,8 @@ class IndexController extends BaseController
     {
         //日历
         $rili = [
-            ['date' => '2024-10-18', 'info' => '回国', 'data' => ['custom' => '自定义信息', 'name' => '自定义消息头']],
-            ['date' => '2024-09-30', 'info' => '林颖生日', 'data' => ['custom' => '自定义信息', 'name' => '自定义消息头']]
+            ['date' => '2024-10-18', 'info' => '回国'],
+            ['date' => '2024-09-30', 'info' => 'birthday', 'data' => ['custom' => '自定义信息', 'name' => '自定义消息头']]
         ];
         //星座
         $xingzuo = Cache::get('xing_zuo');
@@ -54,7 +54,7 @@ class IndexController extends BaseController
             $responseResult = json_decode($response, true);
             if ($responseResult) {
                 // 网络请求成功。可依据业务逻辑和接口文档说明自行处理。
-                $xingzuo = $responseResult['name'] . '今日运势：' . '综合指数' . $responseResult['all'] . '幸运色-' . $responseResult['color'] . '健康指数-' . $responseResult['health'] . '爱情指数-' . $responseResult['love'] . '财运指数-' . $responseResult['money'] . '工作指数-' . $responseResult['work'] . '幸运数字-' . $responseResult['number'] . '今日概述-' . $responseResult['summary'];
+                $xingzuo = $responseResult['name'] . '今日运势：' . '综合指数' . $responseResult['all'] . ';幸运色-' . $responseResult['color'] . ';健康指数-' . $responseResult['health'] . ';爱情指数-' . $responseResult['love'] . ';财运指数-' . $responseResult['money'] . ';工作指数-' . $responseResult['work'] . ';幸运数字-' . $responseResult['number'] . ';今日概述-' . $responseResult['summary'];
                 $now = time(); // 当前时间的时间戳
                 $endOfDay = strtotime('tomorrow midnight') - 1; // 明天凌晨 00:00 的时间戳 - 1 秒，表示当天晚上 23:59:59
                 $secondsUntilMidnight = $endOfDay - $now; // 当前时间到午夜的秒数

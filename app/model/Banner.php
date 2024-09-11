@@ -4,7 +4,7 @@ namespace app\model;
 
 use support\Model;
 
-class Banner extends Model
+class Banner extends Base
 {
     /**
      * The table associated with the model.
