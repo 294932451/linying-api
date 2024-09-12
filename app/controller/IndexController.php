@@ -10,6 +10,7 @@ class IndexController extends BaseController
 {
     public function index(Request $request)
     {
+
         //日历
         $rili = [
             ['date' => '2024-10-18', 'info' => '回国'],

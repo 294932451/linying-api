@@ -16,6 +16,7 @@ use Webman\Route;
 use app\controller;
 
 Route::group('/api', function () {
+    Route::any('/login/login', [controller\LoginController::class, 'login']); #登录
     Route::any('/upload/file', [controller\UploadController::class, 'image']); #上传图片
     Route::any('/index', [controller\IndexController::class, 'index']); #首页
     Route::any('/banner', [controller\IndexController::class, 'banner']); #轮播图

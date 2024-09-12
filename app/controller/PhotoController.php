@@ -10,7 +10,7 @@ class PhotoController extends BaseController
 {
     public function photo_cate()
     {
-        $list = PhotoCate::all()->toArray();
+        $list = PhotoCate::where('id','<>',4)->get()->toArray();
         $albums = [];
         foreach ($list as $key => $value) {
             $albums[$key]['id'] = $value['id'];
