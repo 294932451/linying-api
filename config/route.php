@@ -14,10 +14,10 @@
 
 use Webman\Route;
 use app\controller;
-
+Route::any('/api/login/login', [controller\LoginController::class, 'login']); #登录
+Route::any('/api/upload/file', [controller\UploadController::class, 'image']); #上传图片
 Route::group('/api', function () {
-    Route::any('/login/login', [controller\LoginController::class, 'login']); #登录
-    Route::any('/upload/file', [controller\UploadController::class, 'image']); #上传图片
+    Route::any('/login/refresh_token', [controller\LoginController::class, 'refreshToken']); #刷新token
     Route::any('/index', [controller\IndexController::class, 'index']); #首页
     Route::any('/banner', [controller\IndexController::class, 'banner']); #轮播图
     Route::any('/my/images', [controller\MyController::class, 'images']); #我的首页图
@@ -27,7 +27,7 @@ Route::group('/api', function () {
     Route::any('/daily_article/list', [controller\DailyArticleController::class, 'index']); #日记列表
     Route::any('/daily_article/save', [controller\DailyArticleController::class, 'save']); #记日记
     Route::any('/daily_article/detail/{id}', [controller\DailyArticleController::class, 'detail']); #记日记
-});
+})->middleware(\app\middleware\ApiAuthMiddleware::class);
 
 
 

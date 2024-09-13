@@ -79,11 +79,13 @@ class IndexController extends BaseController
     public function banner()
     {
         $list = Cache::get('random_banner');
-
         if (!$list) {
             // 如果缓存中没有图片列表，生成并缓存它
             $list = Photo::pluck('url')->random(5);
-            Cache::set('random_banner', $list, 86400); // 缓存一天，86400 秒
+            $now = time(); // 当前时间的时间戳
+            $endOfDay = strtotime('tomorrow midnight') - 1; // 明天凌晨 00:00 的时间戳 - 1 秒，表示当天晚上 23:59:59
+            $secondsUntilMidnight = $endOfDay - $now; // 当前时间到午夜的秒数
+            Cache::set('random_banner', $list, $secondsUntilMidnight); // 缓存一天，86400 秒
         }
 
         return json([
