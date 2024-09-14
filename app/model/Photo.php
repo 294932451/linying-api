@@ -27,6 +27,8 @@ class Photo extends Base
      */
     public $timestamps = true;
 
+    protected $guarded = [];
+
     public function getUrlAttribute($value)
     {
         return 'http://39.98.115.211:8787'.$value;

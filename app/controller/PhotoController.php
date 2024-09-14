@@ -45,4 +45,23 @@ class PhotoController extends BaseController
 
         return $this->success($list);
     }
+
+    public function savePhotos(Request $request)
+    {
+        $data = $request->post();
+        try {
+            foreach ($data['photos'] as $photo) {
+                Photo::create([
+                    'url' => $photo,
+                    'cate_id' => $data['cate_id'],
+                    'uid' => $data['uid']
+                ]);
+            }
+            return $this->success();
+        }catch (\Throwable $e){
+            var_dump($e->getMessage());
+            return $this->error('保存失败');
+        }
+       
+    }
 }

@@ -23,6 +23,8 @@ class UploadController
             case 2:
                 $imgPath = '/upload/img/daily/' . date('Ymd');
                 break;
+            case 3:
+                $imgPath = '/upload/img/albums/' . date('Ymd');
         }
         $data = $this->base($request, $imgPath);
         $realpath = $data['realpath'];
@@ -47,7 +49,7 @@ class UploadController
             ]);
         }
         return json( [
-            'code'  => 0,
+            'code'  => 200,
             'msg'  => '上传成功',
             'data' => [
                 'url' => $data['url'],
