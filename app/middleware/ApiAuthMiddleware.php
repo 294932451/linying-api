@@ -17,7 +17,7 @@ class ApiAuthMiddleware implements MiddlewareInterface
 
         // 验证 Token 是否存在及格式
         if (!$authHeader || !preg_match('/Bearer\s(\S+)/', $authHeader, $matches)) {
-            return json(['error' => 'Unauthorized'], 401);
+            return json(['code'=>401,'msg'=>"Unauthorized"]);
         }
 
         $token = $matches[1]; // 提取 Token
@@ -30,10 +30,10 @@ class ApiAuthMiddleware implements MiddlewareInterface
             return $handler($request); // 验证通过，继续请求
         } catch (ExpiredException $e) {
             // 如果 Token 过期，返回特定错误信息
-            return json(['error' => 'Token expired'], 401);
+            return json(['code'=>401,'msg'=>"Token expired"]);
         } catch (\Throwable $e) {
             // 其他 JWT 验证失败的情况
-            return json(['error' => 'Unauthorized', 'message' => $e->getMessage()], 401);
+            return json(['error' => 'Unauthorized', 'msg' => $e->getMessage()], 401);
         }
     }
 
