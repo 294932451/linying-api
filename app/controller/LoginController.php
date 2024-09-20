@@ -6,6 +6,7 @@ use Firebase\JWT\ExpiredException;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use plugin\admin\app\model\User;
+use support\Db;
 use support\Request;
 
 class LoginController
@@ -81,4 +82,27 @@ class LoginController
     {
         return JWT::decode($token, new Key($key, 'HS256'));
     }
+
+
+    public function updateApp()
+    {
+        $model = Db::table('ying_app')->find(1);
+        $data = [
+            'name' => $model->name,
+            'version' => $model->version,
+            'wgtUrl' => $model->wgetUrl,
+            'isNew' => $model->is_new,
+        ];
+        return json(['code' => 200, 'msg' => 'success', 'data' => $data]);
+    }
+
+    public function updateIsNew()
+    {
+        $model = Db::table('ying_app')->find(1);
+        $model->is_new = 0;
+        $model->save();
+        return json(['code' => 200, 'msg' => 'success']);
+    }
+
+
 }

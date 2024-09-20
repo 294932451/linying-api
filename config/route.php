@@ -16,8 +16,11 @@ use Webman\Route;
 use app\controller;
 Route::any('/api/login/login', [controller\LoginController::class, 'login']); #登录
 Route::any('/api/upload/file', [controller\UploadController::class, 'image']); #上传图片
+Route::any('/api/login/refresh_token', [controller\LoginController::class, 'refreshToken']); #刷新token
+Route::any('/api/login/update_app', [controller\LoginController::class, 'updateApp']); #更新
+Route::any('/api/login/update_new', [controller\LoginController::class, 'updateIsNew']); #更新完成
+
 Route::group('/api', function () {
-    Route::any('/login/refresh_token', [controller\LoginController::class, 'refreshToken']); #刷新token
     Route::any('/index', [controller\IndexController::class, 'index']); #首页
     Route::any('/banner', [controller\IndexController::class, 'banner']); #轮播图
     Route::any('/my/images', [controller\MyController::class, 'images']); #我的首页图

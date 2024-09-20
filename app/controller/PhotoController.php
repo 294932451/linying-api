@@ -25,6 +25,7 @@ class PhotoController extends BaseController
     public function photo_list($cate_id)
     {
         $list = Photo::where('cate_id', $cate_id)
+            ->orderByDesc('id')
             ->get()
             ->groupBy(function($photo) {
                 // 按照日期格式化创建时间
