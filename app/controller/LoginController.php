@@ -7,6 +7,7 @@ use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use plugin\admin\app\model\User;
 use support\Db;
+use support\Log;
 use support\Request;
 
 class LoginController
@@ -26,7 +27,7 @@ class LoginController
             'iss' => 'https://39.98.115.211',  // 发行者
             'aud' => 'https://39.98.115.211',  // 受众
             'iat' => time(),               // 颁发时间
-            'exp' => time() + 3600,         // 过期时间（例如1小时）
+            'exp' => time() + 86400 * 7,         // 过期时间（例如24*7小时）
             'sub' => $user->id,                // 用户的ID (subject)
             'user_info' => [
                 'id' => $user->id,
@@ -60,7 +61,7 @@ class LoginController
                 'iss' => 'https://39.98.115.211',
                 'aud' => 'https://39.98.115.211',
                 'iat' => time(),
-                'exp' => time() + 3600  // 新的1小时访问 Token
+                'exp' => time() + 86400*7  // 新的1小时访问 Token
             ];
 
             $newAccessToken = JWT::encode($accessPayload, $key, 'HS256');
@@ -87,12 +88,15 @@ class LoginController
     public function updateApp()
     {
         $model = Db::table('ying_app')->find(1);
-        $data = [
-            'name' => $model->name,
-            'version' => $model->version,
-            'wgtUrl' => $model->wgetUrl,
-            'isNew' => $model->is_new,
-        ];
+        $data = [];
+        if ($model->is_new == 1) {
+            $data = [
+                'version' => $model->version,
+                'wgtUrl' => $model->wgt_url,
+                'isNew' => $model->is_new,
+            ];
+        }
+
         return json(['code' => 200, 'msg' => 'success', 'data' => $data]);
     }
 

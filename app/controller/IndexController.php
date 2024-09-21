@@ -13,12 +13,20 @@ class IndexController extends BaseController
 
         //日历
         $rili = [
-            ['date' => '2024-10-18', 'info' => '回国'],
-            ['date' => '2024-09-30', 'info' => 'birthday', 'data' => ['custom' => '自定义信息', 'name' => '自定义消息头']]
+            ['date' => '2024-09-27', 'info' => '经期', 'data' => ['type'=>0,'has_data'=>0]],
+            ['date' => '2024-09-26', 'info' => '经期', 'data' => ['type'=>0,'has_data'=>0]],
+            ['date' => '2024-09-25', 'info' => '经期', 'data' => ['type'=>0,'has_data'=>0]],
+            ['date' => '2024-09-24', 'info' => '经期', 'data' => ['type'=>0,'has_data'=>0]],
+            ['date' => '2024-09-23', 'info' => '经期', 'data' => ['type'=>0,'has_data'=>0]],
+            ['date' => '2024-09-22', 'info' => '经期', 'data' => ['type'=>0,'has_data'=>0]],
+            ['date' => '2024-09-21', 'info' => '经期', 'data' => ['type'=>0,'has_data'=>0]],
+            ['date' => '2024-09-20', 'info' => '经期', 'data' => ['type'=>0,'has_data'=>0]],
+            ['date' => '2024-10-18', 'info' => '回国','data' => ['type'=>2,'has_data'=>0]],
+            ['date' => '2024-09-30', 'info' => 'birthday', 'data' => ['type'=>1,'has_data'=>0]],
         ];
         //星座
         $xingzuo = Cache::get('xing_zuo');
-        $data = ['rili' => $rili, 'xing_zuo' => $xingzuo];
+        $data = ['rili' => $rili, 'xing_zuo' => $xingzuo,];
         if (!$xingzuo) {
             /**
              * 158-运势查询 - 代码参考（根据实际业务情况修改）
@@ -60,7 +68,7 @@ class IndexController extends BaseController
                 $endOfDay = strtotime('tomorrow midnight') - 1; // 明天凌晨 00:00 的时间戳 - 1 秒，表示当天晚上 23:59:59
                 $secondsUntilMidnight = $endOfDay - $now; // 当前时间到午夜的秒数
                 Cache::set('xing_zuo', $xingzuo, $secondsUntilMidnight); // 缓存一天，86400 秒
-                $data = ['xing_zuo' => $xingzuo, 'rili' => $rili];
+                $data = ['xing_zuo' => $xingzuo, 'rili' => $rili,'jingqi_range'=>$jingqi_range];
                 return $this->success($data);
             } else {
                 // 网络异常等因素，解析结果异常。可依据业务逻辑自行处理。
