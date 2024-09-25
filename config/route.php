@@ -20,10 +20,13 @@ Route::group('/api', function () {
     Route::any('/login/refresh_token', [controller\LoginController::class, 'refreshToken']); #刷新token
     Route::any('/login/update_app', [controller\LoginController::class, 'updateApp']); #更新
     Route::any('/login/update_new', [controller\LoginController::class, 'updateIsNew']); #更新完成
+    Route::any('/index/get_music_cate', [controller\IndexController::class, 'getMusicCate']); #获取音乐分类
+
 });
 
 
 Route::group('/api', function () {
+    Route::any('/index/get_music', [controller\IndexController::class, 'getMusic']); #获取音乐
     Route::any('/index', [controller\IndexController::class, 'index']); #首页
     Route::any('/banner', [controller\IndexController::class, 'banner']); #轮播图
     Route::any('/my/images', [controller\MyController::class, 'images']); #我的首页图
@@ -34,6 +37,7 @@ Route::group('/api', function () {
     Route::any('/daily_article/list', [controller\DailyArticleController::class, 'index']); #日记列表
     Route::any('/daily_article/save', [controller\DailyArticleController::class, 'save']); #记日记
     Route::any('/daily_article/detail/{id}', [controller\DailyArticleController::class, 'detail']); #记日记
+    Route::any('/photo/create_photo_cate', [controller\PhotoController::class, 'createPhotoCate']); #创建相册
 })->middleware(\app\middleware\ApiAuthMiddleware::class,\app\middleware\AccessControl::class);
 
 

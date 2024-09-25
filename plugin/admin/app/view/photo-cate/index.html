@@ -20,7 +20,10 @@
                             <input type="number" name="id" value="" class="layui-input">
                         </div>
                     </div>
-                    
+
+
+
+
                     <div class="layui-form-item">
                         <label class="layui-form-label">创建时间</label>
                         <div class="layui-input-block">
@@ -126,6 +129,9 @@
 					},{
 						title: "相册创建人",align: "center",
 						field: "uid",
+                        templet: function (d) {
+                            return d.user.nickname
+                        }
 					},{
 						title: "操作",
 						toolbar: "#table-bar",

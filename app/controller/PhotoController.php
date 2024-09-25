@@ -21,6 +21,13 @@ class PhotoController extends BaseController
 
     }
 
+    public function createPhotoCate(Request $request)
+    {
+        $params = $request->post();
+        PhotoCate::create(['name' => $params['cate_name'], 'uid' => $params['uid']]);
+        return $this->success();
+    }
+
 
     public function photo_list($cate_id)
     {
@@ -60,7 +67,6 @@ class PhotoController extends BaseController
             }
             return $this->success();
         }catch (\Throwable $e){
-            var_dump($e->getMessage());
             return $this->error('保存失败');
         }
        

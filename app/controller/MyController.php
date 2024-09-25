@@ -13,7 +13,7 @@ class MyController
     public function index(Request $request)
     {
         $lin = '0930';
-        $tong = '1119';
+        $tong = '1019';
         // 获取当前日期
         // 获取当前日期
         $now = new DateTime();
@@ -36,9 +36,9 @@ class MyController
         $list = [
             ['name' => '距离猪猪林的生日还有', 'days' => $linDaysRemaining,'iconClass'=>'http://39.98.115.211:8787/app/admin/upload/img/20240912/66e2b6609949.jpg'],
             ['name' => '距离猪猪童的生日还有', 'days' => $tongDaysRemaining ,'iconClass'=>'http://39.98.115.211:8787/app/admin/upload/img/20240912/66e2b6577353.jpg'],
-            ['name' =>  '第一次打电话睡觉','days' => '2024-07-28'],
+            ['name' =>  '第一次打电话睡觉','days' => '2024-07-28','iconClass'=>'http://39.98.115.211:8787/app/admin/upload/img/20240925/66f3d36c5605.jpg'],
+            ['name' =>  '第一次说我爱你','days' => '2024-08-12','iconClass'=>'http://39.98.115.211:8787/app/admin/upload/img/20240925/66f3d36ccde6.jpg'],
             ['name' =>  '第一次过中秋节','days' => '2024-09-17','iconClass'=>'http://39.98.115.211:8787/app/admin/upload/img/20240918/66ea37559322.jpg'],
-
         ];
         return json([
            'code' => 1,

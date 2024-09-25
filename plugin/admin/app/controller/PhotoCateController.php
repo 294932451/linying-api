@@ -27,6 +27,19 @@ class PhotoCateController extends Crud
     {
         $this->model = new PhotoCate;
     }
+
+    /**
+     * @param Request $request
+     * @return Response
+     * @throws BusinessException
+     */
+    public function select(Request $request): Response
+    {
+        [$where, $format, $limit, $field, $order] = $this->selectInput($request);
+        $query = $this->doSelect($where, $field, $order);
+        $query = $query->with('user:id,nickname');
+        return $this->doFormat($query, $format, $limit);
+    }
     
     /**
      * 浏览

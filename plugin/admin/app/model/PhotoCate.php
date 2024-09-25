@@ -26,6 +26,12 @@ class PhotoCate extends Base
      * @var string
      */
     protected $primaryKey = 'id';
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'uid');
+    }
+
+    protected $guarded = [];
     
     
     

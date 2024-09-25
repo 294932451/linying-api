@@ -35,7 +35,11 @@ class Photo extends Base
     {
         return $this->belongsTo(PhotoCate::class, 'cate_id');
     }
-    
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'uid');
+    }
     
     
 }

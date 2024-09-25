@@ -38,7 +38,7 @@ class PhotoController extends Crud
     {
         [$where, $format, $limit, $field, $order] = $this->selectInput($request);
         $query = $this->doSelect($where, $field, $order);
-        $query = $query->with('photo_cate');
+        $query = $query->with(['photo_cate:id,name','user:id,nickname']);
         return $this->doFormat($query, $format, $limit);
     }
 
@@ -67,6 +67,7 @@ class PhotoController extends Crud
                 $this->model->create([
                     'cate_id' => $request->input('cate_id'),
                     'url' => $image,
+                    'uid' => $request->input('uid'),
                 ]);
             }
         }

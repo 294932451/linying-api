@@ -20,6 +20,16 @@
                             <input type="number" name="id" value="" class="layui-input">
                         </div>
                     </div>
+
+                    <!-- 新增筛选搜索功能 -->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">筛选</label>
+                        <div class="layui-input-block">
+                            <select name="cate_id" lay-filter="cate_id-filter">
+                                <option value="">全部</option>
+                            </select>
+                        </div>
+                    </div>
                     
                     <div class="layui-form-item">
                         <label class="layui-form-label">创建时间</label>
@@ -102,8 +112,24 @@
                 let form = layui.form;
                 let $ = layui.$;
                 let common = layui.common;
-                let util = layui.util;
-                
+
+                // 获取下拉选项
+                $.ajax({
+                    url: '/app/admin/photo-cate/select', // 替换为你的接口地址
+                    method: 'GET',
+                    success: function(data) {
+                        // 假设返回的数据格式为 [{ id: 1, name: '中奖' }, { id: 0, name: '未中奖' }]
+                        data.data.forEach(function(item) {
+
+                            $('select[name="cate_id"]').append(new Option(item.name, item.id));
+                        });
+                        form.render('select'); // 刷新下拉框
+                    },
+                    error: function(error) {
+                        console.error('获取选项失败:', error);
+                    }
+                });
+
 				// 表头参数
 				let cols = [
 					{
@@ -129,6 +155,9 @@
 					},{
 						title: "uid",align: "center",
 						field: "uid",
+                        templet: function (d) {
+                            return d.user.nickname
+                        }
 					},{
 						title: "相册分类",align: "center",
 						field: "cate_id",
