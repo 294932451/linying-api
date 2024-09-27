@@ -3,6 +3,7 @@
 namespace app\controller;
 
 use app\model\Photo;
+use plugin\admin\app\model\CalendarDatum;
 use plugin\admin\app\model\Music;
 use plugin\admin\app\model\MusicCate;
 use support\Cache;
@@ -14,19 +15,11 @@ class IndexController extends BaseController
     {
 //        $type = [1'热情',2'活力',3'快乐',4'健康',5'青春',6'清爽',7'可靠',8'冷静',9'科技',10'浪漫',11'优雅',12'欢乐'];
         //日历
-        $rili = [
-            ['date' => '2024-11-13', 'info' => '离别😟', 'data' => ['type' => 8, 'has_data' => 0]],
-            ['date' => '2024-09-27', 'info' => '经期', 'data' => ['type' => 0, 'has_data' => 0]],
-            ['date' => '2024-09-26', 'info' => '经期', 'data' => ['type' => 0, 'has_data' => 0]],
-            ['date' => '2024-09-25', 'info' => '经期', 'data' => ['type' => 0, 'has_data' => 0]],
-            ['date' => '2024-09-24', 'info' => '经期', 'data' => ['type' => 0, 'has_data' => 0]],
-            ['date' => '2024-09-23', 'info' => '经期', 'data' => ['type' => 0, 'has_data' => 0]],
-            ['date' => '2024-09-22', 'info' => '经期', 'data' => ['type' => 0, 'has_data' => 0]],
-            ['date' => '2024-09-21', 'info' => '经期', 'data' => ['type' => 0, 'has_data' => 0]],
-            ['date' => '2024-09-20', 'info' => '经期', 'data' => ['type' => 0, 'has_data' => 0]],
-            ['date' => '2024-10-18', 'info' => '重逢😁', 'data' => ['type' => 3, 'has_data' => 0]],
-            ['date' => '2024-09-30', 'info' => '生日🎂', 'data' => ['type' => 12, 'has_data' => 0]],
-        ];
+        $rili = CalendarDatum::all()->map(function ($item) {
+            // 手动解析 JSON 字符串为数组
+            $item->data = json_decode($item->data, true);
+            return $item;
+        });
         //星座
         $xingzuo = Cache::get('xing_zuo');
         $xingzuo_details = Cache::get('xingzuo_details');

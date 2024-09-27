@@ -32,14 +32,7 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">地址</label>
                         <div class="layui-input-block">
-                            <span></span>
-                            <input type="text" style="display:none" name="url" value="" />
-                            <button type="button" class="pear-btn pear-btn-primary pear-btn-sm" id="url" permission="app.admin.upload.file">
-                                <i class="layui-icon layui-icon-upload"></i>上传文件
-                            </button>
-                            <button type="button" class="pear-btn pear-btn-primary pear-btn-sm" id="attachment-choose-url" permission="app.admin.upload.attachment">
-                                <i class="layui-icon layui-icon-align-left"></i>选择文件
-                            </button>
+                            <input type="text" name="url" value="" class="layui-input">
                         </div>
                     </div>
                     
@@ -115,35 +108,6 @@
                                 clickClose: true,
                                 radio: true,
                             })
-                        });
-                        
-                        // 字段 地址 url
-                        layui.use(["upload", "layer", "popup", "util"], function() {
-                            let input = layui.$("#url").prev();
-                            input.prev().html(layui.util.escape(input.val()));
-                            layui.$("#attachment-choose-url").on("click", function() {
-                                parent.layer.open({
-                                    type: 2,
-                                    title: "选择附件",
-                                    content: "/app/admin/upload/attachment",
-                                    area: ["95%", "90%"],
-                                    success: function (layero, index) {
-                                        parent.layui.$("#layui-layer" + index).data("callback", function (data) {
-                                            input.val(data.url).prev().html(layui.util.escape(data.url));
-                                        });
-                                    }
-                                });
-                            });
-                            layui.upload.render({
-                                elem: "#url",
-                                accept: "file",
-                                url: "/app/admin/upload/file",
-                                field: "__file__",
-                                done: function (res) {
-                                    if (res.code) return layui.popup.failure(res.msg);
-                                    this.item.prev().val(res.data.url).prev().html(layui.util.escape(res.data.url));
-                                }
-                            });
                         });
                         
                         
